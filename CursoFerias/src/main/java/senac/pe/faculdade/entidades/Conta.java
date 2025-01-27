@@ -36,18 +36,31 @@ public class Conta {
             return false;
         }
     }
+
     //sacar
     public boolean sacar(double valor) {
         if (valor > 0 && valor <= this.saldo) {
             this.saldo -= valor; // this.saldo = this.saldo - valor;
             this.transacoes.add(new Transacao(TipoTransacao.SAQUE, valor, new Date(), '-'));
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
     //transferir
+    public boolean transferir(double valor, Conta contaDestino) {
+        if (valor > 0 && valor <= this.saldo && contaDestino != null) {
+            this.saldo -= valor;
+            this.transacoes.add(new Transacao(TipoTransacao.TRANSFERENCIA, valor, new Date(), contaDestino, '-'));
+            contaDestino.saldo += valor;
+            contaDestino.transacoes.add(new Transacao(TipoTransacao.TRANSFERENCIA, valor, new Date(), this, '+'));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     //realizarPix
 

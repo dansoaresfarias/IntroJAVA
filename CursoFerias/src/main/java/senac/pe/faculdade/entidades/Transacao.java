@@ -6,14 +6,14 @@ public class Transacao {
     private TipoTransacao tipo;
     private double valor;
     private Date data;
-    private Cliente clienteTransferencia;
+    private Conta contaTransferencia;
     private char tipoValor;
 
-    public Transacao(TipoTransacao tipo, double valor, Date data, Cliente clienteTransferencia, char tipoValor) {
+    public Transacao(TipoTransacao tipo, double valor, Date data, Conta contaTransferencia, char tipoValor) {
         this.tipo = tipo;
         this.valor = valor;
         this.data = data;
-        this.clienteTransferencia = clienteTransferencia;
+        this.contaTransferencia = contaTransferencia;
         this.tipoValor = tipoValor;
     }
 
@@ -38,11 +38,13 @@ public class Transacao {
         return data;
     }
 
-    public Cliente getClienteTransferencia() {
-        return clienteTransferencia;
+    public Conta getContaTransferencia() {
+        return contaTransferencia;
     }
 
     public char getTipoValor() {
         return tipoValor;
     }
+
+    // toString()
 }
