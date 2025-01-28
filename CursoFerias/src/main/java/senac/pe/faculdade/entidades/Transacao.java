@@ -47,4 +47,14 @@ public class Transacao {
     }
 
     // toString()
+
+    @Override
+    public String toString() {
+        return this.data.toLocaleString() + " \t " + this.tipo + " \t " +
+                (this.tipo.equals(TipoTransacao.TRANSFERENCIA) ?
+                        this.contaTransferencia.getAgencia().getNumero() + "|" +  this.contaTransferencia.getNumero() :
+                            "       \t") + "\t\t\t" +
+                ( this.tipoValor == '-' ? "\t\t" + this.tipoValor : "\t")
+                + this.valor;
+    }
 }

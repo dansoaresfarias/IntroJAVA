@@ -1,7 +1,4 @@
-import senac.pe.faculdade.entidades.Agencia;
-import senac.pe.faculdade.entidades.Cliente;
-import senac.pe.faculdade.entidades.Conta;
-import senac.pe.faculdade.entidades.Endereco;
+import senac.pe.faculdade.entidades.*;
 
 import java.util.Date;
 
@@ -47,10 +44,10 @@ public class Main {
         System.out.println(miguel);
         System.out.println(charles);
 
-        Conta contaMiguel = new Conta(miguel, 784512, agSenac,
-                    new Date(125, 00, 26), 1400, true);
-        Conta contaCharles = new Conta(charles, 875421, agSenac,
-                    new Date(125, 00, 20), 2000, true);
+        Conta contaMiguel = new ContaCorrente(miguel, 784512, agSenac,
+                    new Date(125, 00, 26), 1400, true, 500);
+        Conta contaCharles = new Poupanca(charles, 875421, agSenac,
+                    new Date(125, 00, 20), 2000, true, 1.05);
 
         System.out.println(contaMiguel.sacar(1500));
         System.out.println(contaCharles.depositar(-250));
@@ -59,8 +56,15 @@ public class Main {
         contaMiguel.sacar(1000);
         contaCharles.sacar(800);
         contaMiguel.depositar(1300);
-
-
+        contaCharles.sacar(1000);
+        contaCharles.depositar(1000);
+        contaMiguel.transferir(-500, contaCharles);
+        contaMiguel.transferir(12000, contaCharles);
+        contaMiguel.transferir(1000, null);
+        contaCharles.transferir(300, contaMiguel);
+        contaMiguel.sacar(1800);
+        System.out.println(contaCharles.imprimirExtrato());
+        System.out.println(contaMiguel.imprimirExtrato());
 
     }
 }

@@ -3,15 +3,15 @@ package senac.pe.faculdade.entidades;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Conta {
+public abstract class Conta {
 
     private Cliente cliente;
     private int numero;
     private Agencia agencia;
     private Date dataAbertura;
-    private double saldo;
+    protected double saldo;
     private boolean status;
-    private ArrayList<Transacao> transacoes;
+    protected ArrayList<Transacao> transacoes;
 
     public Conta(Cliente cliente, int numero, Agencia agencia, Date dataAbertura, double saldo, boolean status) {
         this.cliente = cliente;
@@ -61,12 +61,25 @@ public class Conta {
         }
     }
 
-
-    //realizarPix
-
     //imprimirExtrato
+    public final String imprimirExtrato() {
+        String extrato = this.toString();
+        if(this.transacoes.size() > 0){
+            extrato += "Data \t\t\t\t\t\t\t Lançamentos \t\t Agência|Conta \t\t Valor(R$)\n";
+            extrato += "-------------------------------------------------------------------------------------- \n";
+            for (Transacao transacao : this.transacoes) {
+                extrato += transacao.toString() + "\n";
+            }
+        }
+        return extrato;
+    }
 
-    //toString
+
+    @Override
+    public String toString() {
+        return "Agência: " + this.getAgencia().getNumero() + " | Conta: " + this.getNumero() + " | Saldo(R$): " + this.getSaldo() + "\n" +
+                "-------------------------------------------------------------------------------------- \n";
+    }
 
     public void setNumero(int numero) {
         this.numero = numero;
